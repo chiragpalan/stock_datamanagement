@@ -66,13 +66,18 @@ def fetch_and_append_data():
             "Close": "close",
             "Adj Close": "adj_close",
             "Volume": "volume"
-        })
+        })[["datetime", "open", "high", "low", "close", "adj_close", "volume"]]
+
+        # Verify the data structure
+        print(f"Data to append for {stock}:")
+        print(data_to_append.head())
 
         # Append data to the table
         data_to_append.to_sql(table_name, conn, if_exists="append", index=False)
         print(f"Appended data for {stock}.")
 
     conn.close()
+
 
 def push_database_to_github():
     """Commit and push the updated database to GitHub."""
