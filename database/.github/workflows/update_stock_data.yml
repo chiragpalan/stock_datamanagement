@@ -1,0 +1,27 @@
+name: Update Nifty50 Data
+
+on:
+  schedule:
+    - cron: "30 3-10 * * 1-5" # Every 15 minutes from 9:15 AM to 3:30 PM IST (adjusted for UTC)
+  workflow_dispatch: # Allow manual execution
+
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+      with:
+        persist-credentials: true
+
+    - name: Set Up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install Dependencies
+      run: pip install yfinance pandas
+
+    - name: Run Update Script
+      run: python update_stock_data.py
