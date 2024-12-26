@@ -7,7 +7,7 @@ import subprocess
 # Database path in the GitHub repository
 DB_PATH = "database/nifty50_stocks.db"
 STOCK_LIST = [
-    "RELIANCE.BO", "TCS.BO", "HDFCBANK.BO", "INFY.BO", "ICICIBANK.BO",  # Add more tickers as needed
+    "RELIANCE.BO", "TCS.BO", "HDFCBANK.BO", "INFY.BO", "ICICIBANK.BO"  # Add more tickers as needed
 ]
 START_DATE = "2024-12-23"  # Start date for data download
 INTERVAL = "5m"  # Data interval
@@ -18,6 +18,19 @@ def fetch_and_append_data():
     for stock in STOCK_LIST:
         table_name = stock.replace(".", "_")
         print(f"Processing stock: {stock}")
+
+        # Ensure the table exists
+        conn.execute(f"""
+            CREATE TABLE IF NOT EXISTS {table_name} (
+                datetime TEXT PRIMARY KEY,
+                open REAL,
+                high REAL,
+                low REAL,
+                close REAL,
+                adj_close REAL,
+                volume INTEGER
+            )
+        """)
 
         # Fetch the latest date in the database
         cursor = conn.cursor()
