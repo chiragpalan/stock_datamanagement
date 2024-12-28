@@ -37,7 +37,7 @@ def fetch_and_store_stock_data():
                 interval="5m",
                 progress=False
             )
-            data.reset_index(inplace=True)
+            data.T.reset_index(inplace=True)
             print(data)
             print(symbol, data.columns)
             
