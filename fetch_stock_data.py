@@ -39,6 +39,7 @@ def fetch_and_store_stock_data():
             )
             data.reset_index(inplace=True)
             print(symbol, data.columns)
+            print(data.head(2))
 
             # Save to database
             table_name = symbol.replace(".", "_")
