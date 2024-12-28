@@ -1,4 +1,4 @@
-name: Fetch Nifty 50 Data
+name: Fetch Stock Data Data
 
 on:
   schedule:
