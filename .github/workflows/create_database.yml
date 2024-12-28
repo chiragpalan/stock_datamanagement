@@ -1,4 +1,4 @@
-name: Create Nifty 50 Database
+name: Create All Stock Database
 
 on:
   workflow_dispatch:  # Allows manual triggering from the GitHub Actions UI
