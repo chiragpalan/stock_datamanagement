@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - nifty50_data.db  # Trigger the workflow when this file is updated
+  workflow_dispatch:
 
 jobs:
   update-readme:
