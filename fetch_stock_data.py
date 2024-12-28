@@ -40,6 +40,7 @@ def fetch_and_store_stock_data():
             data.reset_index(inplace=True)
             print(data)
             print(symbol, data.columns)
+            data.rename(columns = {"Adj Close":"adj_close"}, inplace = True)
             
             
             # Save to database
