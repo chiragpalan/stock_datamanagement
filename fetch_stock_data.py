@@ -41,6 +41,7 @@ def fetch_and_store_stock_data():
             print(data)
             print(symbol, data.columns)
             data.rename(columns = {"Adj Close":"adj_close"}, inplace = True)
+            df['Datetime'] = df['Datetime'].dt.tz_localize(None)
             
             
             # Save to database
