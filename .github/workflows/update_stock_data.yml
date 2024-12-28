@@ -3,6 +3,7 @@ name: Fetch Nifty 50 Data
 on:
   schedule:
     - cron: "*/15 3-10 * * 1-5"  # Every 15 minutes between 9:15 AM to 3:30 PM IST (adjusted to UTC)
+  workflow_dispatch:
 
 jobs:
   fetch_data:
