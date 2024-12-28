@@ -24,12 +24,13 @@ jobs:
           pip install yfinance pandas pytz
 
       - name: Run script
-        run: python fetch_stock_data.py
+        run: |
+          python fetch_stock_data.py
 
-      - name: Push data to GitHub
+      - name: Commit and push the database file if there are changes
         run: |
           git config --global user.name "chiragpalan"
           git config --global user.email "your-email@example.com"
-          git add -f nifty50_data.db
+          git add nifty50_data.db
           git commit -m "Update Nifty 50 data" || echo "No changes to commit."
           git push
