@@ -20,10 +20,11 @@ def get_db_connection():
 
 # Fetch data for all stocks
 def fetch_and_store_stock_data():
-    tz = pytz.timezone('Asia/Kolkata')
-    now = datetime.now(tz)
-    start_date = (now - timedelta(days=5)).strftime('%Y-%m-%d')  # Fetch last 5 days of data
-    end_date = now.strftime('%Y-%m-%d %H:%M:%S')
+    # tz = pytz.timezone('Asia/Kolkata')
+    # now = datetime.now(tz)
+    start_date = "2024-12-23"  # Fetch last 5 days of data
+    print(start_date)
+    end_date = datetime.now().strftime("%Y-%m-%d")
 
     conn = get_db_connection()
     nifty50_symbols = get_nifty50_symbols()
@@ -39,7 +40,7 @@ def fetch_and_store_stock_data():
                 progress=False
             )
             data.reset_index(inplace=True)
-            data["Datetime"] = data["Datetime"].dt.tz_localize('UTC').dt.tz_convert('Asia/Kolkata')
+            # data["Datetime"] = data["Datetime"].dt.tz_localize('UTC').dt.tz_convert('Asia/Kolkata')
 
             # Save to database
             table_name = symbol.replace(".", "_")
@@ -58,6 +59,7 @@ def is_market_open():
     market_end = now.replace(hour=15, minute=30, second=0, microsecond=0)
 
     return market_start <= now <= market_end and now.weekday() < 5  # Monday to Friday
+    # return True
 
 if __name__ == "__main__":
     if is_market_open():
