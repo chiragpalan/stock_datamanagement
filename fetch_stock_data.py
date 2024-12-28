@@ -3,6 +3,7 @@ import sqlite3
 import pandas as pd
 from datetime import datetime, timedelta
 import pytz
+import os
 
 # Define stock symbols for Nifty 50
 def get_nifty50_symbols():
@@ -12,6 +13,9 @@ def get_nifty50_symbols():
 # Database connection
 def get_db_connection():
     db_path = "nifty50_data.db"  # Local database file
+    # Create database file if it does not exist
+    if not os.path.exists(db_path):
+        open(db_path, 'w').close()
     return sqlite3.connect(db_path)
 
 # Fetch data for all stocks
