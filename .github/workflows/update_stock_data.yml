@@ -23,7 +23,7 @@ jobs:
           pip install yfinance pandas pytz
 
       - name: Run script
-        run: python fetch_nifty50_data.py
+        run: python fetch_stock_data.py
 
       - name: Push data to GitHub
         run: |
