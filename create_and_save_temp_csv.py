@@ -18,7 +18,7 @@ for ticker in tickers:
         file_path = os.path.join(output_dir, f"{file_name}.csv")
         stock_data.rename(columns = {"Adj Close":"Adj_Close"}, inplace = True)
         # Save to CSV
-        stock_data.to_csv(file_path)
+        stock_data.to_csv(file_path,index=True, mode='w')
         print(f"Saved data for {ticker} to {file_path}")
     else:
         print(f"No data found for {ticker}")
