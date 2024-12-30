@@ -1,4 +1,4 @@
-name: Stock Data Pipeline
+name: Download and Append CSVs to DB
 
 on:
   schedule:
