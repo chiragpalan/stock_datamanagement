@@ -18,7 +18,7 @@ for ticker in tickers:
         file_name = ticker.replace(".", "_")
         file_path = os.path.join(output_dir, f"{file_name}.csv")
         stock_data.rename(columns = {"Adj Close":"Adj_Close"}, inplace = True)
-        data['Datetime'] = data['Datetime'].dt.tz_localize(None)
+        stock_data['Datetime'] = stock_data['Datetime'].dt.tz_localize(None)
         # Save to CSV
         stock_data.to_csv(file_path,index=True, mode='w')
         print(f"Saved data for {ticker} to {file_path}")
