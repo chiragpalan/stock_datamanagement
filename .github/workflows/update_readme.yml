@@ -1,10 +1,10 @@
 name: Update README on Database Change
 
 on:
-  push:
-    paths:
-      - nifty50_data.db  # Trigger the workflow when this file is updated
-  workflow_dispatch:
+  schedule:
+    # Run every 15 minutes from Monday to Friday
+    - cron: '15-30/15 9-15 * * 1-5'
+  workflow_dispatch:  # Allow manual triggering of the workflow
 
 jobs:
   update-readme:
