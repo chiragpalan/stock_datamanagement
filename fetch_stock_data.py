@@ -32,8 +32,9 @@ def fetch_and_store_stock_data():
         try:
             data = yf.download(
                 symbol,
-                start=start_date,
-                end=end_date,
+                period = '1d',
+                # start=start_date,
+                # end=end_date,
                 interval="5m",
                 progress=False
             )
