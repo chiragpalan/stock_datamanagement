@@ -31,7 +31,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: csv-files
-          path: temp_csvs  # Folder containing the CSV files
+          #path: temp_csvs  # Folder containing the CSV files
 
   append_to_db:
     runs-on: ubuntu-latest
