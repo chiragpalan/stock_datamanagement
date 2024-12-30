@@ -18,6 +18,7 @@ for ticker in tickers:
         # Format the ticker name for the file
         file_name = ticker.replace(".", "_")
         file_path = os.path.join(output_dir, f"{file_name}.csv")
+        stock_data.reset_index(inplace = True)
         stock_data.rename(columns = {"Adj Close":"Adj_Close"}, inplace = True)
         print(stock_data)
         stock_data['Datetime'] = stock_data['Datetime'].dt.tz_localize(None)
