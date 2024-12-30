@@ -17,8 +17,9 @@ for ticker in tickers:
         # Format the ticker for the file name
         file_name = ticker.replace(".", "_")
         print(stock_data)
+        
         # Save the data to a CSV file in the temp_csvs folder
-        stock_data.to_csv(f"{file_name}.csv")
+        stock_data.to_csv(f"temp_scvs/{file_name}.csv")
         print(f"Data for {ticker} saved to {file_name}.csv")
     else:
         print(f"No data available for {ticker}")
