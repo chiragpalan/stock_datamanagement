@@ -1,0 +1,19 @@
+import yfinance as yf
+# List of tickers
+tickers = ["RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS", "ICICIBANK.NS"]
+
+# Loop through each ticker, download the data, and save it to a CSV file
+for ticker in tickers:
+    # Download data for the ticker
+    stock_data = yf.download(ticker, period="1d", interval="5m")
+    
+    # Check if data is available
+    if not stock_data.empty:
+        # Format the ticker for the file name
+        file_name = ticker.replace(".", "_")  # Replace '.' with '_'
+        save_path = "temp_csvs/" + file_name
+        # Save the data to a CSV file
+        stock_data.to_csv(f"{save_path}.csv")
+        print(f"Data for {ticker} saved to {file_name}.csv")
+    else:
+        print(f"No data available for {ticker}")
