@@ -2,8 +2,8 @@ name: Download and Append CSVs to DB
 
 on:
   schedule:
-    # Run every 15 minutes Monday to Friday between 9:15 AM to 3:30 PM with a 2-minute delay between jobs
-    - cron: '15,30,45,00 9-15 * * 1-5'  # This will run at 9:15, 9:30, 9:45, ..., 3:30 PM (Monday to Friday)
+    # Run every 15 minutes Monday to Friday between 9:15 AM to 3:30 PM
+    - cron: '15,30,45,00 9-15 * * 1-5' 
   workflow_dispatch:  # Allow manual trigger from GitHub UI
 
 jobs:
@@ -27,12 +27,23 @@ jobs:
         run: |
           python create_and_save_temp_csv.py
 
+      - name: Upload CSV files as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: csv-files
+          path: temp_csvs  # Folder containing the CSV files
+
   append_to_db:
     runs-on: ubuntu-latest
     needs: download_data
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+
+      - name: Download CSV files artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: csv-files
 
       - name: Set up Python
         uses: actions/setup-python@v2
