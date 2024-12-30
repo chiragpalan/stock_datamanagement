@@ -1,25 +1,26 @@
 import yfinance as yf
 import os
 
+# Directory to save CSV files
+output_dir = "temp_csvs"
+
 # Create the directory if it doesn't exist
-# os.makedirs("temp_csvs", exist_ok=True)
+os.makedirs(output_dir, exist_ok=True)
+print(f"Directory '{output_dir}' created or already exists.")
 
 # List of tickers
 tickers = ["RELIANCE.NS", "TCS.NS", "INFY.NS", "HDFCBANK.NS", "ICICIBANK.NS"]
 
-# Loop through each ticker, download the data, and save it to a CSV file
+# Download data and save to CSV
 for ticker in tickers:
-    # Download data for the ticker
+    print(f"Downloading data for {ticker}...")
     stock_data = yf.download(ticker, period="1d", interval="5m")
     
     # Check if data is available
     if not stock_data.empty:
-        # Format the ticker for the file name
-        file_name = ticker.replace(".", "_")
-        print(stock_data)
-        
-        # Save the data to a CSV file in the temp_csvs folder
-        stock_data.to_csv(f"temp_csvs/{file_name}.csv")
-        print(f"Data for {ticker} saved to {file_name}.csv")
+        file_name = ticker.replace(".", "_") + ".csv"
+        file_path = os.path.join(output_dir, file_name)
+        stock_data.to_csv(file_path)
+        print(f"Data for {ticker} saved to {file_path}")
     else:
-        print(f"No data available for {ticker}")
+        print(f"No data available for {ticker}.")
