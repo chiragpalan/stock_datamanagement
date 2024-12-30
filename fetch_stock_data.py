@@ -20,14 +20,9 @@ def get_db_connection():
 
 # Fetch data for all stocks
 def fetch_and_store_stock_data():
-    # start_date = "2024-12-23"  # Fetch last 5 days of data
-    # print(start_date)
-    # end_date = datetime.now().strftime("%Y-%m-%d")
 
-
-    start_date = datetime.now() - timedelta(days=1)  # Fetch last 5 days of data
-    start_date = start_date.strftime("%Y-%m-%d")    
-    print(start_date)
+    start_date = datetime.now() - timedelta(days=5)  # Fetch last 5 days of data
+    start_date = start_date.strftime("%Y-%m-%d")
     end_date = datetime.now().strftime("%Y-%m-%d")
 
     conn = get_db_connection()
@@ -38,11 +33,11 @@ def fetch_and_store_stock_data():
         try:
             data = yf.download(
                 symbol,
-                period = '1d',
-                # start=start_date,
-                # end=end_date,
+                # period = '1d',
+                start=start_date,
+                end=end_date,
                 interval="5m",
-                # progress=False
+                progress=False
             )
             data.reset_index(inplace=True)
             print(data)
