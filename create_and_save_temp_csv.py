@@ -14,7 +14,7 @@ for ticker in tickers:
     stock_data = yf.download(ticker, period="1d", interval="5m")
     
     if not stock_data.empty:
-        print(stock_data)
+        print(stock_data.columns)
         # Format the ticker name for the file
         file_name = ticker.replace(".", "_")
         file_path = os.path.join(output_dir, f"{file_name}.csv")
